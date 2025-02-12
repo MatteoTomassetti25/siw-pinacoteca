@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifica Curatore</title>
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            margin: 30px 0;
+            color: #333;
+        }
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .form-group {
+            width: 100%;
+            text-align: left;
+        }
+        .form-group label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            background-color: #fff;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #D32F2F;
+            outline: none;
+        }
+        .form-group span {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #D32F2F;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #B22222;
+        }
+        /* Link */
+        .btn-back {
+            display: inline-block;
+            background-color: #D32F2F;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        .btn-back:hover {
+            background-color: #B22222;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modifica Curatore</h1>
+        <form th:action="@{/admin/salvaModificheCuratore/{id}(id=${curatore.id})}" th:object="${curatore}" method="post">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" />
+                <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="cognome">Cognome:</label>
+                <input type="text" id="cognome" th:field="*{cognome}" />
+                <span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="dataNascita">Data di Nascita:</label>
+                <input type="date" id="dataNascita" th:field="*{dataNascita}"  />
+                <span th:if="${#fields.hasErrors('dataNascita')}" th:errors="*{dataNascita}" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="luogoNascita">Luogo di Nascita:</label>
+                <input type="text" id="luogoNascita" th:field="*{luogoNascita}"  />
+                <span th:if="${#fields.hasErrors('luogoNascita')}" th:errors="*{luogoNascita}" class="error-message"></span>
+            </div>
+           
+            <button type="submit">Salva Modifiche</button>
+        </form>
+        <a th:href="@{/admin/listaCuratori}" class="btn-back">Torna alla lista dei curatori</a>
+    </div>
+</body>
+</html>

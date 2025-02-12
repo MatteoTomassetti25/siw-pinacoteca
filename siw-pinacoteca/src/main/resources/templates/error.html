@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ERRORE</title>
+	<link rel="icon" href="/images/icons8-punta-della-matita-32.png" type="image/png" sizes="40x40">
+	<style>
+	body {
+	    background-color: #f0f4f8;
+	    background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png");
+	    background-size: cover;
+	    background-position: center;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	    min-height: 100vh;
+	    margin: 0;
+	    font-family: Arial, sans-serif;
+	    padding: 20px;
+	    text-align: center;
+	}
+
+	.container {
+	    background-color: #ffffff;
+	    padding: 40px;
+	    border-radius: 15px;
+	    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	    max-width: 800px;
+	    width: 90%;
+	}
+
+	h1 {
+	    font-size: 36px;
+	    color: #d9534f; /* Rosso per errore */
+	    margin-bottom: 20px;
+	}
+
+	p {
+	    font-size: 18px;
+	    color: #333;
+	}
+
+	img {
+	    width: 100px; /* Aumentato per maggiore visibilità */
+	    height: 100px; /* Altezza uguale alla larghezza */
+	    border-radius: 50%; /* Rende l'immagine circolare */
+	    object-fit: cover; /* Assicura che l'immagine si adatti senza distorsioni */
+	    margin-bottom: 20px;
+	    border: 3px solid #5d8a98; /* Bordo leggero per evidenziare */
+	}
+
+
+	a {
+	    display: inline-block;
+	    padding: 12px 24px;
+	    background-color: #5d8a98;
+	    color: white;
+	    font-size: 18px;
+	    border-radius: 8px;
+	    text-decoration: none;
+	    margin-top: 20px;
+	}
+
+	a:hover {
+	    background-color: #4a6a73;
+	}
+
+	header {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    width: 100%;
+	    margin-bottom: 20px;
+	}
+
+	header div {
+	    display: flex;
+	    gap: 15px;
+	}
+
+	header a {
+	    padding: 8px 16px;
+	    background-color: #ffc107;
+	    color: #333;
+	    border-radius: 8px;
+	    font-size: 16px;
+	    text-decoration: none;
+	}
+
+	header a:hover {
+	    background-color: #e0a800;
+	}
+
+	</style>
+</head>
+
+<body>
+	<div class="container">
+
+	
+	<!-- PULSANTE LOGIN/LOGOUT -->
+	<header>
+		
+	<div th:if="${userDetails}">
+	   <span th:text="${userDetails.username}"></span>
+	   <a href="/logout">Logout</a>
+	</div>
+	<div sec:authorize="!isAuthenticated()">
+	   <a href="/login">Login</a>
+	</div>
+
+	</header>
+	
+	
+	<div><img src="/images/logo1.png" width="10%" /></div>
+	<h1>SI E' VERIFICATO UN ERRORE</h1>
+    <p th:text="${errorMessage}"></p>
+    <a href="/">Torna alla homepage</a>
+    </div>
+
+
+</body>
+
+</html>

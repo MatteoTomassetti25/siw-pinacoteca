@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opere Filtrate</title>
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+    <style>
+        body {
+            background-color: #f0f4f8; /* Grigio chiaro di fallback */
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px; /* Bordi più arrotondati */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            font-size: 28px; /* Font più grande */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .filter-info {
+            margin-bottom: 30px;
+            font-weight: bold;
+            background: #eee;
+            padding: 15px;
+            border-radius: 10px; /* Bordi più arrotondati */
+        }
+        .opera-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .opera-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+        .opera-item h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .opera-item p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #5d8a98; /* Blu chiaro */
+            color: white;
+            text-decoration: none;
+            border-radius: 10px; /* Bordi più arrotondati */
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #4a6a73; /* Blu scuro */
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mt-4 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Opere Filtrate</h1>
+
+        <!-- Visualizza i filtri applicati -->
+        <div class="filter-info">
+            <p>Filtri applicati:</p>
+            <ul>
+                <li th:if="${selectedArtista != null}">
+                    <strong>Artista:</strong> <span th:text="${selectedArtista.nome} + ' ' + ${selectedArtista.cognome}"></span>
+                </li>
+                <li th:if="${selectedAnno != null}">
+                    <strong>Anno:</strong> <span th:text="${selectedAnno}"></span>
+                </li>
+                <li th:if="${selectedTecnica != null and not #strings.isEmpty(selectedTecnica)}">
+                    <strong>Tecnica:</strong> <span th:text="${selectedTecnica}"></span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Visualizza le opere filtrate -->
+        <div th:if="${not #lists.isEmpty(opere)}">
+            <h2>Opere Trovate</h2>
+            <ul class="opera-list">
+                <li th:each="opera : ${opere}" class="opera-item">
+                    <h3 th:text="${opera.titolo}">Titolo dell'Opera</h3>
+                    <p><strong>Anno:</strong> <span th:text="${opera.anno}">Anno</span></p>
+                    <p th:if="${opera.tecnica != null and not #strings.isEmpty(opera.tecnica)}">
+                        <strong>Tecnica:</strong> <span th:text="${opera.tecnica}">Tecnica</span>
+                    </p>
+                    <p><strong>Collocazione:</strong> <span th:text="${opera.collocazione.nome}">Collocazione</span></p>
+                    <p><strong>Artista:</strong> 
+                        <span th:if="${opera.artista != null}" 
+                              th:text="${opera.artista.nome} + ' ' + ${opera.artista.cognome}">
+                            Nome Artista
+                        </span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Messaggio se nessuna opera viene trovata -->
+        <div th:if="${#lists.isEmpty(opere)}">
+            <p>Nessuna opera corrisponde ai filtri selezionati.</p>
+        </div>
+
+        <!-- Bottone per tornare alla pagina di filtro -->
+        <div class="text-center mt-4">
+            <a href="/filtraOpere" class="btn">Torna ai Filtri</a>
+        </div>
+    </div>
+</body>
+</html>

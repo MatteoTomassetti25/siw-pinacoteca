@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+<head>
+	<title>REGISTRAZIONE CONCULSA</title>
+	<style>
+		        body {
+		            background-color: #f0f4f8; /* Grigio chiaro di fallback */
+		            background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png"); /* Immagine di sfondo */
+		            background-size: cover; /* Copre tutta la pagina */
+		            background-position: center; /* Centra l'immagine */
+		            display: flex;
+		            flex-direction: column; /* Allinea gli elementi verticalmente */
+		            justify-content: center;
+		            align-items: center;
+		            min-height: 100vh;
+		            margin: 0;
+		            font-family: Arial, sans-serif;
+		            padding: 20px;
+		        }
+
+		        .container {
+		            background-color: #ffffff;
+		            padding: 40px; /* Padding aumentato */
+		            border-radius: 20px; /* Bordi stondati */
+		            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		            max-width: 600px; /* Larghezza massima */
+		            width: 90%; /* Larghezza relativa per adattarsi meglio */
+		            text-align: center;
+		        }
+
+		        h1 {
+		            font-size: 36px; /* Font più grande */
+		            color: #333;
+		            margin-bottom: 20px;
+		        }
+				
+				img {
+				    width: 100px; /* Imposta la larghezza del logo */
+				    height: 100px; /* Imposta l'altezza per farlo quadrato */
+				    border-radius: 50%; /* Rende l'immagine circolare */
+				    object-fit: cover; /* Mantiene la proporzione dell'immagine */
+				    margin-bottom: 20px; /* Aggiunge uno spazio sotto l'immagine */
+				}
+
+		        .btn {
+		            background-color: #5d8a98; /* Blu chiaro */
+		            color: white;
+		            padding: 15px 30px; /* Più grande per il pulsante */
+		            border-radius: 12px; /* Bordi più stondati */
+		            font-size: 18px; /* Font più grande per il pulsante */
+		            text-decoration: none;
+		            display: inline-block;
+		            margin-top: 20px;
+		        }
+
+		        .btn:hover {
+		            background-color: #4a6a73; /* Blu scuro al hover */
+		        }
+		    </style>
+</head>
+
+<body>
+	<div class="container">
+
+	<div>
+		<img src="/images/logoPinacoteca.jpeg" width="10%"/></a>
+	</div>
+	<h1>Congratulazioni <span th:text="${utente.nome}"></span>, la registrazione e' andata a buon fine!</h1>
+	<div>
+		<span>Nome: </span>
+		<span th:text="${utente.nome}"></span>
+	<br>
+		<span>Cognome: </span>
+		<span th:text="${utente.cognome}"></span>
+	<br>
+		<span>Email: </span>
+		<span th:text="${utente.email}"></span>
+	</div>
+	<div><BR><a href="/index.html">ACCEDI ORA</a> </div>
+</body>
+</html>

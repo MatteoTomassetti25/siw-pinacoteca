@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifica Area</title>
+    <link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            margin: 30px 0;
+            color: #333;
+        }
+        /* Messaggi di errore o conferma */
+        .message {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+        .success {
+            color: green;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+        /* Stile per i messaggi di errore specifici */
+        .field-error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #D32F2F;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #B22222;
+        }
+        /* Link */
+        a {
+            display: inline-block;
+            background-color: #D32F2F;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        a:hover {
+            background-color: #B22222;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modifica Area</h1>
+        <!-- Messaggi di errore o conferma -->
+        <div th:if="${messaggioErrore}" class="message error" th:text="${messaggioErrore}"></div>
+        <div th:if="${messaggioConferma}" class="message success" th:text="${messaggioConferma}"></div>
+
+        <!-- Messaggi di errore specifici per i campi -->
+        <div th:if="${errorMessages}" class="message error">
+            <ul>
+                <li th:each="error : ${errorMessages}" th:text="${error}" class="field-error"></li>
+            </ul>
+        </div>
+
+        <!-- Form per la modifica dell'area -->
+        <form th:action="@{/admin/salvaModifiche/{id}(id=${area.id})}" method="post">
+            <input type="hidden" name="id" th:value="${area.id}" />
+            
+            <!-- Campo Nome -->
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" th:value="${area.nome}" minlength="2" maxlength="100" />
+            <br><br>
+            
+            <!-- Campo Curatore -->
+            <label for="curatore">Curatore:</label>
+            <select id="curatore" name="curatore">
+                <option value="" th:selected="${area.curatore == null}">-- Nessun curatore --</option>
+                <option th:each="curatore : ${curatori}" 
+                        th:value="${curatore.id}" 
+                        th:text="${curatore.nome + ' ' + curatore.cognome}" 
+                        th:selected="${area.curatore != null && area.curatore.id == curatore.id}">
+                </option>
+            </select>
+            <br><br>
+            
+            <button type="submit">Salva Modifiche</button>
+        </form>
+        <br>
+        <a th:href="@{/admin/listaAree}">Torna alla lista delle aree</a>
+    </div>
+</body>
+</html>

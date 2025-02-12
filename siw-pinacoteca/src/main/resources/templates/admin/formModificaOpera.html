@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifica Opera</title>
+    <link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            margin: 30px 0;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .form-group {
+            width: 100%;
+            text-align: left;
+        }
+        .form-group label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            background-color: #fff;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #D32F2F;
+            outline: none;
+        }
+        .text-danger {
+            color: red; /* Testo rosso */
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        button, .btn-secondary {
+            background-color: #D32F2F;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover, .btn-secondary:hover {
+            background-color: #B22222;
+        }
+        .btn-secondary {
+            background-color: #808080;
+        }
+        .btn-secondary:hover {
+            background-color: #555555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modifica Opera</h1>
+        <form th:action="@{/admin/salvaModificheOpera/{id}(id=${opera.id})}" method="post" th:object="${opera}">
+            <div class="form-group">
+                <label for="titolo">Titolo:</label>
+                <input type="text" id="titolo" th:field="*{titolo}" />
+                <div th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}" class="text-danger"></div>
+            </div>
+            <div class="form-group">
+                <label for="tecnica">Tecnica:</label>
+                <input type="text" id="tecnica" th:field="*{tecnica}" />
+                <div th:if="${#fields.hasErrors('tecnica')}" th:errors="*{tecnica}" class="text-danger"></div>
+            </div>
+            <div class="form-group">
+                <label for="anno">Anno:</label>
+                <input type="number" id="anno" th:field="*{anno}" />
+                <div th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}" class="text-danger"></div>
+            </div>
+            <div class="form-group">
+                <label for="artista">Artista:</label>
+                <select id="artista" th:field="*{artista.id}">
+                    <option th:each="artista : ${artisti}" 
+                            th:value="${artista.id}" 
+                            th:text="${artista.nome} + ' ' + ${artista.cognome}"
+                            th:selected="${artista.id == opera.artista.id}">
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="collocazione">Collocazione:</label>
+                <select id="collocazione" th:field="*{collocazione.id}">
+                    <option th:each="area : ${collocazioni}" 
+                            th:value="${area.id}" 
+                            th:text="${area.nome}" 
+                            th:selected="${area.id == opera.collocazione.id}">
+                    </option>
+                </select>
+            </div>
+            <button type="submit">Salva Modifiche</button>
+            <a href="/admin/listaOpere" class="btn-secondary">Annulla</a>
+        </form>
+    </div>
+</body>
+</html>

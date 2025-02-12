@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuovo Curatore</title>
+    <link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            margin: 30px 0;
+            color: #333;
+        }
+        /* Messaggi di errore */
+        .alert {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .alert-danger {
+            color: red;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+        .field-error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .form-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #D32F2F;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #B22222;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: background 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Inserisci un Nuovo Curatore</h1>
+        
+        <!-- Messaggio di errore generale -->
+        <div th:if="${messaggioErrore}" class="alert alert-danger" role="alert">
+            <p th:text="${messaggioErrore}"></p>
+        </div>
+        <!-- Form per inserire un nuovo curatore -->
+        <form th:action="@{/admin/salvaCuratore}" method="post" th:object="${curatore}">
+            
+            <!-- Campo Nome -->
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome curatore:</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control" />
+                <div th:if="${#fields.hasErrors('nome')}" class="field-error" th:errors="*{nome}"></div>
+            </div>
+            <!-- Campo Cognome -->
+            <div class="mb-3">
+                <label for="cognome" class="form-label">Cognome curatore:</label>
+                <input type="text" id="cognome" th:field="*{cognome}" class="form-control" />
+                <div th:if="${#fields.hasErrors('cognome')}" class="field-error" th:errors="*{cognome}"></div>
+            </div>
+            <!-- Campo Data di Nascita -->
+            <div class="mb-3">
+                <label for="dataNascita" class="form-label">Data di nascita curatore:</label>
+                <input type="date" id="dataNascita" th:field="*{dataNascita}" class="form-control" />
+                <div th:if="${#fields.hasErrors('dataNascita')}" class="field-error" th:errors="*{dataNascita}"></div>
+            </div>
+            <!-- Campo Luogo di Nascita -->
+            <div class="mb-3">
+                <label for="luogoNascita" class="form-label">Luogo di nascita curatore:</label>
+                <input type="text" id="luogoNascita" th:field="*{luogoNascita}" class="form-control" />
+                <div th:if="${#fields.hasErrors('luogoNascita')}" class="field-error" th:errors="*{luogoNascita}"></div>
+            </div>
+            <button type="submit" class="btn btn-success">Salva Curatore</button>
+            <a href="/admin/operazioniCuratore" class="btn btn-secondary">Annulla</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>HomePage</title>
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+	
+	<style>
+	    body {
+	        background-color: #f0f4f8; /* Grigio chiaro di fallback */
+	        background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png"); /* Immagine di sfondo */
+	        background-size: cover; /* Fa in modo che l'immagine copra tutta la pagina */
+	        background-position: center; /* Centra l'immagine */
+	        display: flex;
+	        justify-content: center;
+	        align-items: center;
+	        height: 100vh;
+	        margin: 0;
+	        font-family: Arial, sans-serif;
+	    }
+
+	    .container {
+	        background-color: #ffffff;
+	        padding: 40px; /* Aumentato il padding */
+	        border-radius: 15px; /* Bordi più arrotondati */
+	        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	        max-width: 900px; /* Larghezza massima aumentata */
+	        width: 100%;
+	        text-align: center;
+	    }
+
+	    header {
+	        display: flex;
+	        justify-content: flex-end;
+	        margin-bottom: 30px; /* Margine aumentato */
+	    }
+
+	    header a {
+	        background-color: #5d8a98; /* Blu chiaro */
+	        color: white;
+	        padding: 12px 24px; /* Padding aumentato */
+	        border-radius: 10px; /* Bordi più arrotondati */
+	        text-decoration: none;
+	        font-size: 16px; /* Font più grande */
+	    }
+
+	    header a:hover {
+	        background-color: #4a6a73; /* Blu scuro al hover */
+	    }
+
+	    h1 {
+	        font-size: 28px; /* Font più grande */
+	        margin: 30px 0; /* Margine aumentato */
+	        color: #333;
+	    }
+
+	    .container a {
+	        background-color: #5d8a98; /* Blu chiaro */
+	        color: white;
+	        padding: 15px 30px; /* Padding aumentato */
+	        border-radius: 10px; /* Bordi più arrotondati */
+	        text-decoration: none;
+	        font-size: 16px; /* Font più grande */
+	        display: inline-block;
+	        margin: 15px 0; /* Margine aumentato */
+	        width: 80%;
+	        max-width: 350px; /* Larghezza massima aumentata */
+	    }
+
+	    .container a:hover {
+	        background-color: #4a6a73; /* Blu scuro al hover */
+	    }
+
+	    .container img {
+	        width: 150px; /* Dimensione fissa per il logo */
+	        height: 150px;
+	        border-radius: 50%; /* Rende il logo circolare */
+	        margin: 0 auto 30px auto; /* Margine aumentato */
+	        display: block;
+	        object-fit: cover; /* Assicura che l'immagine si adatti al cerchio */
+	    }
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<!-- PULSANTE LOGIN/LOGOUT -->
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div sec:authorize="!isAuthenticated()">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+
+		<div><img src="/images/logoPinacoteca.jpeg" alt="Logo" /></div>
+		<h1>BENVENUTO NEL SITO DELLA PINACOTECA DI ROMA3</h1>
+		<div>
+			<a href="/listaOpere">Tutte le opere</a>
+			<a href="/filtraOpere">Filtra opere</a>
+		</div>
+	</div>
+</body>
+
+</html>

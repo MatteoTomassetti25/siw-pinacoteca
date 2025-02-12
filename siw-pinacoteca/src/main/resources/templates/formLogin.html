@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="/css/stile1.css" />
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+	<style>
+		body {
+		    background-color: #f0f4f8; /* Grigio chiaro */
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    height: 100vh;
+		    margin: 0;
+		    font-family: Arial, sans-serif;
+		}
+
+		* {
+		    box-sizing: border-box;
+		}
+
+		/* Full-width input fields */
+		input[type=text],
+		input[type=password] {
+		    width: 100%;
+		    padding: 15px;
+		    margin: 5px 0 22px 0;
+		    display: inline-block;
+		    border: none;
+		    background: #f7f9fb; /* Grigio chiaro per gli input */
+		    border-radius: 8px;
+		    font-size: 18px;
+		}
+
+		input[type=text]:focus,
+		input[type=password]:focus {
+		    background-color: #e1e9f0; /* Blu chiaro al focus */
+		    outline: none;
+		}
+
+		/* Linea separatrice */
+		hr {
+		    border: 1px solid #d1dbe1; /* Blu chiaro per la linea */
+		    margin-bottom: 25px;
+		}
+
+		/* Style per i pulsanti */
+		button {
+		    background-color: #5d8a98; /* Blu chiaro */
+		    color: white;
+		    padding: 16px 24px;
+		    margin: 8px 0;
+		    border: none;
+		    cursor: pointer;
+		    width: 100%;
+		    opacity: 0.9;
+		    border-radius: 8px;
+		    font-size: 18px;
+		}
+
+		button:hover {
+		    opacity: 1;
+		    background-color: #4a6a73; /* Blu scuro al hover */
+		}
+
+		/* Container centrale con bordi arrotondati */
+		.container {
+		    background-color: #ffffff; /* Bianco per il contenuto */
+		    padding: 30px;
+		    border-radius: 10px;
+		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		    max-width: 450px;
+		    width: 100%;
+		    margin: 20px;
+		}
+
+		/* Clear floats */
+		.clearfix::after {
+		    content: "";
+		    clear: both;
+		    display: table;
+		}
+
+		/* Stile per l'immagine e il testo al centro */
+		.center {
+		    display: flex;
+		    justify-content: center;
+		    flex-direction: column;
+		    align-items: center;
+		    margin-bottom: 30px;
+		}
+
+		.center img {
+		    margin-left: 10px;
+		    width: 30%; /* Ridotto per non occupare troppo spazio */
+		    height: auto;
+		    border-radius: 50%;
+		}
+
+		.center .site-title {
+		    font-size: 30px;
+		    color: #4a6a73; /* Blu scuro */
+		    margin-top: 10px;
+		}
+
+		.center h1 {
+		    font-size: 36px;
+		    color: #5d8a98; /* Blu chiaro */
+		    margin-bottom: 20px;
+		}
+
+		.center a {
+		    color: #ffffff;
+		    text-decoration: none;
+		    display: inline-block;
+		    padding: 12px 24px;
+		    background-color: #5d8a98;
+		    border-radius: 8px;
+		    font-size: 16px;
+		    margin-top: 20px;
+		    cursor: pointer;
+		    transition: background-color 0.3s ease;
+		}
+
+		.center a:hover {
+		    background-color: #4a6a73;
+		}
+
+		</style>
+    
+</head>
+
+<body>
+    <form th:action="@{/login}" method="POST">
+        <div class="container">
+            <div class="center">
+                <img src="/images/logoPinacoteca.jpeg" width="20%" height="20%" onerror="console.error('Errore nel caricamento dell\'immagine')">
+				<div class="site-title">SIW-PINACOTECA</div>
+                <h1>LOGIN</h1>
+				
+            </div>
+			
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input name="username" type="text" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input name="password" type="password" />
+            </div>
+            <span class="error" th:if="${param.error!= null}">Username o password errati !</span>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <div class="footer">
+        Non hai un account? <a th:href="@{/register}">Registrati</a>
+    </div>
+</body>
+</html>

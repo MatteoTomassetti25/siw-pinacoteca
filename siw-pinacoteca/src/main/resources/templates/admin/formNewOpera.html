@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+    <meta charset="UTF-8">
+    <title>Inserimento Opera</title>
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+	<style>
+	       body {
+	           background-color: #f0f0f0;
+	           background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png");
+	           background-size: cover;
+	           background-position: center;
+	           display: flex;
+	           justify-content: center;
+	           align-items: center;
+	           height: 100vh;
+	           margin: 0;
+	           font-family: Arial, sans-serif;
+	       }
+	       .container {
+	           background-color: #ffffff;
+	           padding: 50px;
+	           border-radius: 15px;
+	           box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	           max-width: 900px;
+	           width: 100%;
+	           text-align: center;
+	       }
+	       h1 {
+	           font-size: 32px;
+	           margin: 30px 0;
+	           color: #333;
+	       }
+	       /* Form */
+	       form {
+	           display: flex;
+	           flex-direction: column;
+	           align-items: center;
+	           gap: 20px;
+	       }
+	       .form-group {
+	           width: 100%;
+	           text-align: left;
+	       }
+	       .form-group label {
+	           font-size: 18px;
+	           font-weight: bold;
+	           color: #333;
+	           display: block;
+	           margin-bottom: 10px;
+	       }
+	       .form-group input, .form-group select {
+	           width: 100%;
+	           padding: 12px;
+	           border-radius: 8px;
+	           border: 1px solid #ccc;
+	           font-size: 16px;
+	           background-color: #fff;
+	           transition: border-color 0.3s ease;
+	       }
+	       .form-group input:focus, .form-group select:focus {
+	           border-color: #D32F2F;
+	           outline: none;
+	       }
+	       .form-group span {
+	           color: red;
+	           font-size: 14px;
+	           margin-top: -10px;
+	           margin-bottom: 10px;
+	       }
+	       button {
+	           background-color: #D32F2F;
+	           color: white;
+	           padding: 14px 28px;
+	           border: none;
+	           border-radius: 10px;
+	           font-size: 18px;
+	           font-weight: bold;
+	           cursor: pointer;
+	           transition: background 0.3s ease;
+	       }
+	       button:hover {
+	           background-color: #B22222;
+	       }
+	       /* Link */
+	       .btn-back {
+	           display: inline-block;
+	           background-color: #D32F2F;
+	           color: white;
+	           padding: 14px 28px;
+	           border-radius: 10px;
+	           text-decoration: none;
+	           font-size: 18px;
+	           font-weight: bold;
+	           margin-top: 20px;
+	           transition: background 0.3s ease;
+	       }
+	       .btn-back:hover {
+	           background-color: #B22222;
+	       }
+		   
+		   .text-danger{
+			color : red;
+		   }
+	   </style> </head>
+ <body>
+	<div class="container">
+	    <h1>Inserimento Opera</h1>
+
+	    <form th:action="@{/admin/salvaOpera}" th:object="${opera}" method="post">
+	        <!-- Campi del form -->
+	        <div class="form-group">
+	            <label for="titolo">Titolo:</label>
+	            <input type="text" class="form-error" id="titolo" th:field="*{titolo}" >
+	            <div th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}" class="text-danger"></div>
+	        </div>
+
+	        <div class="form-group">
+	            <label for="tecnica">Tecnica:</label>
+	            <input type="text" class="form-control" id="tecnica" th:field="*{tecnica}" >
+	            <div th:if="${#fields.hasErrors('tecnica')}" th:errors="*{tecnica}" class="text-danger"></div>
+	        </div>
+
+	        <div class="form-group">
+	            <label for="anno">Anno:</label>
+	            <input type="number" class="form-control" id="anno" th:field="*{anno}" >
+	            <div th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}" class="text-danger"></div>
+	        </div>
+
+	        <div class="form-group">
+	            <label for="collocazione">Collocazione:</label>
+	            <select class="form-control" id="collocazione" th:field="*{collocazione}" >
+	                <option value="">Seleziona un'area</option>
+	                <option th:each="area : ${aree}" th:value="${area.id}" th:text="${area.nome}"></option>
+	            </select>
+	            <div th:if="${#fields.hasErrors('collocazione')}" th:errors="*{collocazione}" class="text-danger"></div>
+	        </div>
+
+	        <div class="form-group">
+	            <label for="artista">Artista:</label>
+	            <select class="form-control" id="artista" th:field="*{artista}" >
+	                <option value="">Seleziona un artista</option>
+	                <option th:each="artista : ${artisti}" th:value="${artista.id}" th:text="(${artista.nome} + ' ' + ${artista.cognome})"></option>
+	            </select>
+	            <div th:if="${#fields.hasErrors('artista')}" th:errors="*{artista}" class="text-danger"></div>
+	        </div>
+
+	        <button type="submit" class="btn btn-primary">Salva</button>
+	        <button type="button" class="btn-cancel" onclick="window.history.back();">Annulla</button>
+	    </form>
+	</div>
+
+</body>
+</html>

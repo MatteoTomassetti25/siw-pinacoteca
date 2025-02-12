@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtra Opere</title>
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+    <style>
+        body {
+            background-color: #f0f4f8; /* Grigio chiaro di fallback */
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px; /* Bordi più arrotondati */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 28px; /* Font più grande */
+            margin-bottom: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px; /* Bordi più arrotondati */
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #5d8a98; /* Blu chiaro */
+            color: white;
+            border: none;
+            border-radius: 10px; /* Bordi più arrotondati */
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #4a6a73; /* Blu scuro */
+        }
+        .btn-secondary {
+            padding: 12px 25px;
+            background-color: #e0a800; /* Giallo per il pulsante di annullamento */
+            color: #333;
+            border: none;
+            border-radius: 10px; /* Bordi più arrotondati */
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #f7c200; /* Giallo più scuro */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Filtra Opere</h1>
+        <form method="GET" th:action="@{/risultatiFiltri}">
+            <!-- Filtro per artista -->
+            <select name="artistaId">
+                <option value="">Tutti gli artisti</option>
+                <option th:each="artista : ${artisti}" 
+                        th:value="${artista.id}" 
+                        th:text="${artista.nome} + ' ' + ${artista.cognome}">
+                </option>
+            </select>
+            <!-- Filtro per anno -->
+            <select name="anno">
+                <option value="">Tutti gli anni</option>
+                <option th:each="anno : ${anni}" 
+                        th:value="${anno}" 
+                        th:text="${anno}">
+                </option>
+            </select>
+            <!-- Filtro per tecnica -->
+            <select name="tecnica">
+                <option value="">Tutte le tecniche</option>
+                <option th:each="tecnica : ${tecniche}" 
+                        th:value="${tecnica}" 
+                        th:text="${tecnica}">
+                </option>
+            </select>
+            <button type="submit">Filtra</button>
+            <a href="/" class="btn-secondary">Annulla</a>
+        </form>
+    </div>
+</body>
+</html>

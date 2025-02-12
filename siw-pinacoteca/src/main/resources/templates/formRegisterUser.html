@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<head>
+    <title>Registrazione</title>
+    <link rel="stylesheet" href="/css/stile.css">
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+    <style>
+		body {
+		    background-color: #f0f4f8; /* Grigio chiaro di fallback */
+		    background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png"); /* Immagine di sfondo */
+		    background-size: cover; /* Fa in modo che l'immagine copra tutta la pagina */
+		    background-position: center; /* Centra l'immagine */
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    height: 100vh;
+		    margin: 0;
+		    font-family: Arial, sans-serif;
+		}
+
+		* {
+		    box-sizing: border-box;
+		}
+
+		/* Full-width input fields */
+		input[type=text],
+		input[type=password] {
+		    width: 100%;
+		    padding: 10px;
+		    margin: 5px 0 15px 0;
+		    display: inline-block;
+		    border: none;
+		    background: #f7f9fb; /* Grigio chiaro per gli input */
+		    border-radius: 5px;
+		    font-size: 14px;
+		}
+
+		input[type=text]:focus,
+		input[type=password]:focus {
+		    background-color: #e1e9f0; /* Blu chiaro al focus */
+		    outline: none;
+		}
+
+		/* Linea separatrice */
+		hr {
+		    border: 1px solid #d1dbe1; /* Blu chiaro */
+		    margin-bottom: 20px;
+		}
+
+		/* Pulsanti */
+		button {
+		    background-color: #5d8a98; /* Blu chiaro */
+		    color: white;
+		    padding: 12px 20px;
+		    margin: 8px 0;
+		    border: none;
+		    cursor: pointer;
+		    width: 100%;
+		    opacity: 0.9;
+		    border-radius: 8px;
+		    font-size: 14px;
+		}
+
+		button:hover {
+		    opacity: 1;
+		    background-color: #4a6a73; /* Blu scuro al hover */
+		}
+
+		/* Container centrale */
+		.form-wrapper {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    width: 100%;
+		    max-width: 600px; /* Riduciamo la larghezza massima */
+		    padding: 20px;
+		    box-sizing: border-box;
+		}
+
+		.container {
+		    background-color: #ffffff;
+		    padding: 20px;
+		    border-radius: 10px;
+		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		    width: 100%;
+		    display: flex;
+		    flex-wrap: wrap;
+		    gap: 15px;
+		}
+
+		/* Logo circolare */
+		.circular-logo {
+		    width: 15%; /* Riduciamo le dimensioni del logo */
+		    height: auto;
+		    margin: 0 auto 10px auto; /* Margine inferiore ridotto */
+		    display: block;
+		    border-radius: 50%; /* Rende l'immagine circolare */
+		}
+
+		/* Gruppo di input con margini */
+		.form-group {
+		    margin-bottom: 10px;
+		}
+
+		.form-group label {
+		    display: block;
+		    margin-bottom: 5px;
+		    font-size: 14px;
+		}
+
+		/* Titolo e testo */
+		h1 {
+		    font-size: 24px;
+		    margin: 10px 0;
+		    text-align: center;
+		}
+
+		p {
+		    font-size: 14px;
+		    text-align: center;
+		    margin: 0 0 15px 0;
+		}
+
+		/* Blocco "Già registrato?" */
+		.center {
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    align-items: center;
+		    margin-top: 15px;
+		}
+
+		.center label {
+		    font-size: 14px;
+		    margin-bottom: 5px;
+		}
+
+    </style>
+</head>
+<body>
+    <div class="form-wrapper">
+        <form th:action="@{/register}" method="POST">
+            <h1>Registrazione</h1>
+            <img src="/images/logoPinacoteca.jpeg" class="circular-logo" onerror="console.error('Errore nel caricamento dell\'immagine')">
+            <a href="/" id="home-button">Home</a>
+            <p>Per favore, compila il form per registrarti.</p>
+            <hr>
+            <div class="container">
+                <div class="left-column">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" placeholder="nome" required th:field="${utente.nome}">
+                        <span th:if="${#fields.hasErrors('utente.nome')}" th:errors="${utente.nome}" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="cognome">Cognome</label>
+                        <input type="text" placeholder="cognome" required th:field="${utente.cognome}">
+                        <span th:if="${#fields.hasErrors('utente.cognome')}" th:errors="${utente.cognome}" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" placeholder="email" required th:field="${utente.email}">
+                        <span th:if="${#fields.hasErrors('utente.email')}" th:errors="${utente.email}" style="color:red"></span>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" placeholder="username" required th:field="${credenziali.username}">
+                        <span th:if="${#fields.hasErrors('credenziali.username')}" th:errors="${credenziali.username}" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="password" required th:field="${credenziali.password}">
+                        <span th:if="${#fields.hasErrors('credenziali.password')}" th:errors="${credenziali.password}" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Ruolo</label>
+                        <select required th:field="${credenziali.role}">
+                            <option value="DEFAULT">STANDARD</option>
+                            <option value="ADMIN">AMMINISTRATORE</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit">Registrati</button>
+
+                <!-- Blocco "Già registrato?" con bottone "Accedi" -->
+                <div class="center">
+                    <label>Gia' registrato?</label>
+                    <button type="button" onclick="window.location.href='/login'">Accedi</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

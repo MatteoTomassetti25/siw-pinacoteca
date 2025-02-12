@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettagli Opera</title>
+	<link rel="icon" href="/images/icons8-pennello-32.png" type="image/png" sizes="40x40">
+	<style>
+	        body {
+	            background-color: #f0f4f8; /* Grigio chiaro di fallback */
+	            background-image: url("https://www.uniroma3.it/assets/img/uniroma3_logo.png"); /* Immagine di sfondo */
+	            background-size: cover; /* Fa in modo che l'immagine copra tutta la pagina */
+	            background-position: center; /* Centra l'immagine */
+	            display: flex;
+	            flex-direction: column; /* Allinea gli elementi verticalmente */
+	            justify-content: center;
+	            align-items: center;
+	            min-height: 100vh;
+	            margin: 0;
+	            font-family: Arial, sans-serif;
+	            padding: 20px;
+	        }
+
+	        .container {
+	            background-color: #ffffff;
+	            padding: 40px; /* Padding aumentato */
+	            border-radius: 20px; /* Bordi più stondati */
+	            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	            max-width: 900px; /* Larghezza massima */
+	            width: 90%; /* Larghezza relativa per adattarsi meglio */
+	            text-align: center;
+	            margin-bottom: 30px; /* Margine inferiore per separare dal pulsante */
+	        }
+
+	        h1 {
+	            font-size: 36px; /* Font più grande */
+	            margin-bottom: 20px; /* Margine inferiore ridotto */
+	            color: #333;
+	        }
+
+	        h4 {
+	            font-size: 24px; /* Font per la materia */
+	            color: #5d8a98; /* Colore blu chiaro */
+	        }
+
+	        h5 {
+	            font-size: 22px; /* Font per i sottotitoli */
+	            margin-bottom: 10px; /* Margine per separare dal testo */
+	            color: #333;
+	        }
+
+	        pre {
+	            font-size: 18px; /* Font più grande per il contenuto */
+	            background-color: #f7f9fb; /* Grigio chiaro di sfondo */
+	            padding: 15px;
+	            border-radius: 10px; /* Bordi stondati */
+	            white-space: pre-wrap; /* Testo a capo automatico */
+	            word-wrap: break-word;
+	            margin-bottom: 20px;
+	            width: 100%;
+	            overflow-wrap: break-word;
+	        }
+
+	        p {
+	            font-size: 18px; /* Font per la data */
+	            color: #333;
+	            margin-bottom: 20px;
+	        }
+
+	        .btn {
+	            background-color: #5d8a98; /* Blu chiaro */
+	            color: white;
+	            padding: 15px 30px; /* Più grande per il pulsante */
+	            border-radius: 12px; /* Bordi più stondati */
+	            font-size: 18px; /* Font più grande per il pulsante */
+	            margin: 10px;
+	            display: inline-block;
+	        }
+
+	        .btn:hover {
+	            background-color: #4a6a73; /* Blu scuro al hover */
+	        }
+
+	        .text-center {
+	            text-align: center;
+	        }
+
+	        .mt-4 {
+	            margin-top: 40px; /* Più spazio tra gli elementi */
+	        }
+	    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center" th:text="${opera.titolo}"></h1>
+        <h2 class="text-muted" th:text="${opera.artista.nome}"></h2>
+		<h4 class="text-muted" th:text="${opera.collocazione.nome}"></h4>
+
+        <div class="mt-4">
+            <h5>Tecnica:</h5>
+            <p th:text="${opera.tecnica}"></p>
+        </div>
+
+        <div class="mt-4">
+            <h5>Anno:</h5>
+            <p th:text="${opera.anno}"></p>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="/listaOpere" class="btn btn-secondary">Torna alla Lista</a>
+        </div>
+    </div>
+</body>
+</html>
